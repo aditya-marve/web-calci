@@ -1,42 +1,37 @@
-const colors = ['blue','green','red','purple','orange','pink','yellow'];
-let colorIndex = 0;
+ function calculate(operation) {
+        const num1 = parseFloat(document.getElementById("num1").value);
+        const num2 = parseFloat(document.getElementById("num2").value);
+        let result;
 
-function changeColor(){
-    const button = document.querySelector('.color-button');
-    button.style.backgroundColor = colors[colorIndex];
-    colorIndex = (colorIndex + 1) % colors.length;
-}
+        if (isNaN(num1) || isNaN(num2)) {
+            result = "Please enter valid numbers.";
+        } else {
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    result = num2 !== 0 ? (num1 / num2).toFixed(2) : "Cannot divide by zero.";
+                    break;
+                case 'remainder':
+                    result = num2 !== 0 ? num1 % num2 : "Cannot divide by zero.";
+                    break;
+                default:
+                    result = "Invalid operation";
+            }
+        }
 
-function displayGreeting(){
-    const now = new Date();
-    const hours = now.getHours();
-    let greeting;
-
-    if (hours < 12){
-        greeting = "Good Moring!";
-    } else if (hours < 18){
-        greeting = "Good Afternoon!";
-    } else {
-        greeting = "Good Evening";
+        document.getElementById("result").innerText = result;
     }
 
-    document.getElementById('greetingMessage').innerText = greeting;
-    document.getElementById('greetingModal').style.display = 'flex';
-}
-
-function closeModal(){
-    document.getElementById('greetingModal').style.display = 'none';
-}
-
-function calculateSum(){
-    const num1 = parseFloat(document.getElementById('num1').value);
-    const num2 = parseFloat(document.getElementById('num2').value);
-
-    if (isNaN(num1) || isNaN(num2)){
-      alert("Please fill out both fields.");
-      return;
+    function changeColor() {
+        const colors = ["#f94144", "#f3722c", "#f8961e", "#90be6d", "#43aa8b", "#577590"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.querySelector('.box').style.backgroundColor = randomColor;
     }
-
-    const sum = num1 + num2;
-    document.getElementById('result').innerText = sum ? sum : '';
-}
